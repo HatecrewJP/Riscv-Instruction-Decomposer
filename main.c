@@ -312,6 +312,8 @@ int main(){
 			break;
 		}
         
+        
+        
 		char Instruction_in[12]={0};
 		char Instruction[9]={0};
         
@@ -326,8 +328,9 @@ int main(){
             
             Assert(Instruction_in[len]=='\n');
             Instruction_in[len]=0;
-            memcpy(Instruction+8-len,Instruction_in,len);
-            memset(Instruction,'0',8-len);
+            memset(Instruction,'0',8);
+            
+            memcpy(Instruction+(8-len)*IsBigEndian,Instruction_in,len);
             int IsValid = 1;
             for(int i = 0; i < 8;i++){
                 char CurrentChar = Instruction[i];
@@ -394,6 +397,7 @@ int main(){
 			case 'q':{
 				Assert(0);
 			}break;
+            
 			
 		}
         printf("%s",Section);

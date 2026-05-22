@@ -31,9 +31,9 @@ set BuildDir=bin
 set CodePath=%Root%
 set Libraries=
 set CommonCompilerFlags=-Zi -nologo -MTd
-set CommonLikerFlags=%Libraries%
+set CommonLinkerFlags=%Libraries% /incremental:no
 
 if not exist %BuildDir% mkdir %BuildDir%
 pushd %BuildDir%
-cl %CommonCompilerFlags% %CodePath%main.c /link %CommonLinkerFlags%
+cl %CommonCompilerFlags% %CodePath%main.c   /link %CommonLinkerFlags% /OUT:RVDecomp.exe
 popd
