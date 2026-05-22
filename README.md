@@ -45,5 +45,11 @@ Usage:
 
 "Output":
  - The decompsed instruction is always converted to be displayed with the msb on the left
- 
+
+
+Build:
+- Windows x64: Install msvc build tools. run "build.bat"
+  ->./bin/RVDecomp.exe
+- Linux x64:   Install gcc. Run "build_gcc.sh"
+  ->./bin_linux/RVDecomp
  
