@@ -61,7 +61,7 @@ internal void PrintImmediate(char *Imm){
     
     unsigned int Imm_u = 0;
     for(int i=0; i<32;i++){
-        Imm_u += (Imm_zext[i]-'0')<<(11-i);
+        Imm_u += (Imm_zext[i]-'0')<<(31-i);
     }
     printf("Imm unsigned: %u\n",Imm_u);
     int Imm_s = 0;
