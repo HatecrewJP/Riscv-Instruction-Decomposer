@@ -1,5 +1,6 @@
 #include "stdio.h"
-#define Assert(x) do{if(x==0) {__debugbreak();}}while(0);
+#include "string.h"
+#define Assert(x) do{if((x)==0) {*(int*)0 = 0;}}while(0);
 
 #define global static
 #define internal static
@@ -193,7 +194,7 @@ internal void ProcessBType(char *Instruction){
     printf("Imm_10_5:0b%s\n",Imm_10_5);
     printf("Imm_12:0b%s\n",Imm_12);
     
-    char Imm[14]={0};
+    char Imm[15]={0};
     sprintf(Imm,"%s%s%s%s0",Imm_12,Imm_11,Imm_10_5,Imm_4_1);
     printf("Imm: %s\n",Imm);
     
@@ -272,13 +273,40 @@ int GetInput(char *Buffer, int BufferSize,char *Message){
     return 0;
 }
 
+int IsValidType(char Type){
+    switch(Type){
+        case 'R':
+        case 'r':
+        case 'I':
+        case 'i':
+        case 'S':
+        case 's':
+        case 'B':
+        case 'b':
+        case 'U':
+        case 'u':
+        case 'J':
+        case 'j':
+        case 'E':
+        case 'e':
+        case 'Q':
+        case 'q':
+        return 1;
+        default: return 0;
+    }
+}
+
 int main(){
 	int IsBigEndian = 1;
     int Running = 1;
 	while(Running){
 		char Type[3] = {0};
-		printf("Type: ");
+		printf("Type:");
         if(GetInput(Type,3,"Unknown Type")) continue;
+        if(!IsValidType(Type[0])){
+            printf("Unknown Type\n");
+            continue;
+        }
 		if(Type[0]=='Q' || Type[0]=='q'){
 			Running=0;
 			break;
@@ -288,7 +316,7 @@ int main(){
 		char Instruction[9]={0};
         
         if(Type[0]!='E' && Type[0]!='e'){
-			printf("32-Bit Instruction in Hex: ");
+			printf("32-Bit Instruction in Hex:");
             if(GetInput(Instruction_in,12,"Instruction is not 32bit")) continue;
             if(!strncmp(Instruction_in,"0x",2)){
                 memcpy(Instruction_in,Instruction_in+2,10);
@@ -354,7 +382,7 @@ int main(){
 			case 'E':
             case 'e':{
                 char Endian[3] = {0};
-                printf("EndianFormat:\n 1:Big Endian\n 0:Little Endian\n");
+                printf("EndianFormat:\n-1:Big Endian\n-0:Little Endian\n");
                 printf("%s",Section);
                 printf("%s",Section);
                 
@@ -367,9 +395,6 @@ int main(){
 				Assert(0);
 			}break;
 			
-			default:{
-                Assert(0);
-			}
 		}
         printf("%s",Section);
         printf("%s",Section);
