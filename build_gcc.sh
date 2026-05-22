@@ -1,7 +1,7 @@
 
 mkdir -p bin_linux/
 cd bin_linux/
-gcc -Wall -Wextra ../main.c -march=x86-64 -o RVDecomp
+gcc -Wall -Wextra ../main.c -march=native -o RVDecomp
 cd ../
 
 
