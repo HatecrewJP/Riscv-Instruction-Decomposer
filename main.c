@@ -115,14 +115,14 @@ internal void ProcessIType(char *Instruction){
     memcpy(Imm_11_0,AsBin,12);
     
     printf("InstructionH:0x%s\n",Instruction);
-    printf("InstructionB:0b%s\n",AsBin);
+    printf("InstructionB:0b\033[31m%.12s\033[0m%.20s\n",AsBin, AsBin+12);
     printf("%s",Section);
     
     printf("Opcode:0b%s\n",Opcode);
     printf("rd:0b%s\n",rd);
     printf("func3:0b%s\n",func3);
     printf("rs1:0b%s\n",rs1);
-    printf("Imm_11_0:0b%s\n",Imm_11_0);
+    printf("Imm_11_0:0b\033[31m%s\033[0m\n",Imm_11_0);
     PrintImmediate(Imm_11_0);
 }
 
@@ -144,19 +144,19 @@ internal void ProcessSType(char *Instruction){
     memcpy(Imm_11_5,AsBin,7);
     
     printf("InstructionH:0x%s\n",Instruction);
-    printf("InstructionB:0b%s\n",AsBin);
+    printf("InstructionB:0b\033[31m%.7s\033[0m%.13s\033[32m%.5s\033[0m%.7s\n",AsBin,AsBin+7,AsBin+20,AsBin+25);
     printf("%s",Section);
     
     printf("Opcode:0b%s\n",Opcode);
-    printf("Imm_4_0:0b%s\n",Imm_4_0);
+    printf("Imm_4_0:0b\033[32m%s\033[0m\n",Imm_4_0);
     printf("func3:0b%s\n",func3);
     printf("rs1:0b%s\n",rs1);
     printf("rs2:0b%s\n",rs2);
-    printf("Imm_11_5:0b%s\n",Imm_11_5);
+    printf("Imm_11_5:0b\033[31m%s\033[0m\n",Imm_11_5);
     
     char Imm[13]={0};
     sprintf(Imm,"%s%s",Imm_11_5,Imm_4_0);
-    printf("Imm: %s\n",Imm);
+    printf("Imm: \033[31m%.7s\033[32m%.5s\033[0m\n",Imm,Imm+7);
     PrintImmediate(Imm);
 }
 
@@ -182,21 +182,22 @@ internal void ProcessBType(char *Instruction){
     memcpy(Imm_12,AsBin,1);
     
     printf("InstructionH:0x%s\n",Instruction);
-    printf("InstructionB:0b%s\n",AsBin);
+    printf("InstructionB:0b\033[31m%.1s\033[32m%.6s\033[0m%.13s\033[33m%.4s\033[34m%.1s\033[0m%.7s\n",
+           AsBin,AsBin+1,AsBin+7,AsBin+20,AsBin+24,AsBin+25);
     printf("%s",Section);
     
     printf("Opcode:0b%s\n",Opcode);
-    printf("Imm_11:0b%s\n",Imm_11);
-    printf("Imm_4_1:0b%s\n",Imm_4_1);
+    printf("Imm_11:0b\033[34m%s\033[0m\n",Imm_11);
+    printf("Imm_4_1:0b\033[33m%s\033[0m\n",Imm_4_1);
     printf("func3:0b%s\n",func3);
     printf("rs1:0b%s\n",rs1);
     printf("rs2:0b%s\n",rs2);
-    printf("Imm_10_5:0b%s\n",Imm_10_5);
-    printf("Imm_12:0b%s\n",Imm_12);
+    printf("Imm_10_5:0b\033[32m%s\033[0m\n",Imm_10_5);
+    printf("Imm_12:0b\033[31m%s\033[0m\n",Imm_12);
     
     char Imm[15]={0};
     sprintf(Imm,"%s%s%s%s0",Imm_12,Imm_11,Imm_10_5,Imm_4_1);
-    printf("Imm: %s\n",Imm);
+    printf("Imm:\033[31m%.1s\033[34m%.1s\033[32m%.6s\033[33m%.4s\033[0m0\n",Imm,Imm+1,Imm+2,Imm+8);
     
     PrintImmediate(Imm);
 }
@@ -212,13 +213,13 @@ internal void ProcessUType(char *Instruction){
     memcpy(Imm_31_12,AsBin,20);
     
     printf("InstructionH:0x%s\n",Instruction);
-    printf("InstructionB:0b%s\n",AsBin);
+    printf("InstructionB:0b\033[31m%.20s\033[0m%.12s\n",AsBin,AsBin+20);
     printf("%s",Section);
     
     printf("Opcode:0b%s\n",Opcode);
     printf("rd:0b%s\n",rd);
-    printf("Imm_31_12:0b%s\n",Imm_31_12);
-    printf("Imm:0b%s\n", Imm_31_12);
+    printf("Imm_31_12:0b\033[31m%s\033[0m\n",Imm_31_12);
+    printf("Imm:0b\033[31m%s\033[0m\n", Imm_31_12);
     
     
     PrintImmediate(Imm_31_12);
@@ -241,19 +242,20 @@ internal void ProcessJType(char *Instruction){
     memcpy(Imm_20,AsBin,1);
     
     printf("InstructionH:0x%s\n",Instruction);
-    printf("InstructionB:0b%s\n",AsBin);
+    printf("InstructionB:0b\033[31m%.1s\033[32m%.10s\033[33m%.1s\033[34m%.8s\033[0m%\n",AsBin,AsBin+1,AsBin+11,AsBin+12,AsBin+20);
     printf("%s",Section);
     
     printf("Opcode:0b%s\n",Opcode);
     printf("rd:0b%s\n",rd);
-    printf("Imm_19_12:0b%s\n",Imm_19_12);
-    printf("Imm_11:0b%s\n",Imm_11);
-    printf("Imm_10_1:0b%s\n",Imm_10_1);
-    printf("Imm_20:0b%s\n",Imm_20);
+    printf("Imm_19_12:0b\033[34m%s\033[0m\n",Imm_19_12);
+    printf("Imm_11:0b\033[33m%s\033[0m\n",Imm_11);
+    printf("Imm_10_1:0b\033[32m%s\033[0m\n",Imm_10_1);
+    printf("Imm_20:0b\033[31m%s\033[0m\n",Imm_20);
     
     char Imm[22]={0};
     sprintf(Imm,"%s%s%s%s0",Imm_20,Imm_19_12,Imm_11,Imm_10_1);
-    printf("Imm: %s\n",Imm);
+    printf("Imm: \033[31m%.1s\033[34m%.8s\033[33m%.1s\033[32m%.10s\033[0m0\n",
+           Imm,Imm+1,Imm+9,Imm+10,Imm+20);
     PrintImmediate(Imm);
 }
 
