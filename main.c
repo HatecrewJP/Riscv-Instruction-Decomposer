@@ -270,13 +270,18 @@ internal void ProcessUType(char *Instruction){
     printf("InstructionB:0b\033[31m%.20s\033[0m%.12s\n",AsBin,AsBin+20);
     printf("%s",Section);
     
+    char Imm[33]={0};
+    memset(Imm,'0',32);
+    memcpy(Imm,Imm_31_12,20);
+    
     printf("Opcode:0b%s\n",Opcode);
     printf("rd:0b%s\n",rd);
     printf("Imm_31_12:0b\033[31m%s\033[0m\n",Imm_31_12);
     printf("Imm:0b\033[31m%s\033[0m\n", Imm_31_12);
     
     
-    PrintImmediate(Imm_31_12);
+    
+    PrintImmediate(Imm);
 }
 internal void ProcessJType(char *Instruction){
     char AsBin[33]={0};
